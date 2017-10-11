@@ -1,5 +1,4 @@
 // Package starwars provides a example schema and resolver based on Star Wars characters.
-//
 // Source: https://github.com/graphql/graphql.github.io/blob/source/site/_core/swapiSchema.js
 package schema
 
@@ -143,6 +142,7 @@ var Schema = `
 	union SearchResult = Human | Droid | Starship
 `
 
+// Fake data fror `human` field
 type human struct {
 	ID        graphql.ID
 	Name      string
@@ -207,6 +207,7 @@ func init() {
 	}
 }
 
+// Fake data fror `droid` field
 type droid struct {
 	ID              graphql.ID
 	Name            string
@@ -240,6 +241,7 @@ func init() {
 	}
 }
 
+// Fake data fror `starship` field
 type starship struct {
 	ID     graphql.ID
 	Name   string
@@ -282,8 +284,10 @@ type review struct {
 	commentary *string
 }
 
+// Fake data fro `reviews` field
 var reviews = make(map[string][]*review)
 
+// Resolver is the root resolver which returns nested resolvers.
 type Resolver struct{}
 
 func (r *Resolver) Hero(args struct{ Episode string }) *characterResolver {

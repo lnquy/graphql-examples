@@ -4,13 +4,14 @@ import (
 	"log"
 	"net/http"
 
+	s "github.com/lnquy/graphql-examples/starwars/schema"
 	"github.com/neelance/graphql-go"
 	"github.com/neelance/graphql-go/example/starwars"
 	"github.com/neelance/graphql-go/relay"
-	s "github.com/lnquy/graphql-examples/starwars/schema"
 )
 
 var (
+	// Define global schema
 	schema = graphql.MustParseSchema(s.Schema, &starwars.Resolver{})
 )
 
@@ -19,11 +20,11 @@ func main() {
 		w.Write(page)
 	}))
 
-	http.Handle("/query", &relay.Handler{Schema: schema})
-
+	http.Handle("/query", &relay.Handler{Schema: schema}) // GraphQL handler
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+// Webpage with GraphiQL
 var page = []byte(`
 <!DOCTYPE html>
 <html>

@@ -3,11 +3,12 @@ package main
 import (
 	"github.com/neelance/graphql-go"
 	"github.com/neelance/graphql-go/relay"
-	"net/http"
 	"log"
+	"net/http"
 )
 
 var (
+	// Define global schema
 	schema = graphql.MustParseSchema(helloWorlSchema, &Resolver{})
 
 	helloWorlSchema = `
@@ -21,8 +22,10 @@ var (
 	`
 )
 
-type Resolver struct {}
+// Resolver is the resolver for Query type from GraphQL schema.
+type Resolver struct{}
 
+// Message resolves data for `message` field.
 func (r *Resolver) Message() string {
 	return "Hello world!"
 }
@@ -32,11 +35,11 @@ func main() {
 		w.Write(page)
 	}))
 
-	http.Handle("/query", &relay.Handler{Schema: schema})
-
+	http.Handle("/query", &relay.Handler{Schema: schema}) // GraphQL handler
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
+// Webpage with GraphiQL
 var page = []byte(`
 <!DOCTYPE html>
 <html>
@@ -84,4 +87,4 @@ var page = []byte(`
 {
   message
 }
- */
+*/
