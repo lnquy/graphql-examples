@@ -21,7 +21,7 @@ func main() {
 	}))
 
 	http.Handle("/query", &relay.Handler{Schema: schema}) // GraphQL handler
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8090", nil))
 }
 
 // Webpage with GraphiQL
